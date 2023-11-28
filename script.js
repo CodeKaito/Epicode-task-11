@@ -47,13 +47,14 @@ let searchAlgorithm = (location, jobTitle) => {
     return resultObject;
 }
 
+
 // Definizione della funzione per creare il titolo "Result"
 let createTheResultTitle = (num) => {
     // Creo l'elemento h1 per il titolo "Result"
     const titleResult = document.createElement("h1");
 
     // Se ho risultati, aggiungo il valore "Result: " + il count dei risultati, se no mostro la scritta "NO RESUL"
-    (num === 0) ? titleResult.innerHTML = "No result" : titleResult.innerHTML = "Result: " + num;
+    (num === 0) ? titleResult.innerHTML = "No result" : titleResult.innerHTML = "Results: " + num;
 
     // Aggiungo la classe result per dargli uno styling
     titleResult.classList.add("result");
@@ -66,7 +67,8 @@ let createTheResultTitle = (num) => {
     console.log(existingTitle.innerText);
 }
 
-// TODO: create the result table
+// TODO: REFACTOR THIS FUNCTION
+// TODO: Aggiungi la condizione -> quando non ci sono risultati, non far comparire le row della tabella
 let createTheResultTable = (resultArray) => {
     // Creazione di una tabella
     const table = document.createElement("table");
@@ -79,16 +81,19 @@ let createTheResultTable = (resultArray) => {
 
     // Creazione di celle e inserimento di testo
     let headerCell1 = document.createElement("td");
-    headerCell1.textContent = "#";
+    headerCell1.textContent = "#"; // Assegno valore # alla prima colonna
+    headerCell1.classList.add("bold"); // Aggiungo la classe bold per dare un pó di grassetto all header cell 1
     let headerCell2 = document.createElement("td");
-    headerCell2.textContent = "Location";
+    headerCell2.textContent = "Location"; // Assegno valore Location alla seconda colonna
+    headerCell2.classList.add("bold"); // Aggiungo la classe bold per dare un pó di grassetto all header cell 2
     let headerCell3 = document.createElement("td");
-    headerCell3.textContent = "Job Title";
+    headerCell3.textContent = "Job Title"; // Assegno valore "Job Title" alla terza colonna
+    headerCell3.classList.add("bold"); // Aggiungo la classe bold per dare un pó di grassetto all header cell 3 
 
     // Aggiunta delle celle di intestazione alla riga di intestazione
-    headerRow.appendChild(headerCell1);
-    headerRow.appendChild(headerCell2);
-    headerRow.appendChild(headerCell3);
+    headerRow.appendChild(headerCell1); // La colonna #
+    headerRow.appendChild(headerCell2); // La colonna "Location"
+    headerRow.appendChild(headerCell3); // La colonna "Job Title"
 
     // Aggiunta della riga di intestazione alla tabella
     table.appendChild(headerRow);
@@ -100,9 +105,13 @@ let createTheResultTable = (resultArray) => {
 
         // Creazione di celle e inserimento di testo
         let cell1 = document.createElement("td");
-        cell1.textContent = (i + 1).toString(); // Numero di riga
+        cell1.textContent = i + 1; // Aggiungo il numero di riga incrementato dell'indice (i) + 1, le righe partiranno dal numero 1.
+
+        // Creazione di una cella per la colonna "Location"
         let cell2 = document.createElement("td");
         cell2.textContent = resultArray[i].location;
+        
+        // Creazione di una cella per la colonna "Job Title"
         let cell3 = document.createElement("td");
         cell3.textContent = resultArray[i].title;
 
@@ -115,13 +124,14 @@ let createTheResultTable = (resultArray) => {
         table.appendChild(row);
     }
 
-    // Aggiunta della tabella al corpo del documento
+    // Aggiunta delle righe create dal for loop al corpo del documento, sotto l'headerRow    
     document.body.appendChild(table);
 
     // Aggiorno la variabile existingTable con la nuova tabella
     existingTable = table;
 }
 
+//? MAIN FUNCTION
 // Inserisco in una variabile il pulsante button
 let submit = document.getElementById('cerca');
 // Richiamo l'addEventListener per richiamare la funzione
@@ -145,7 +155,7 @@ submit.addEventListener('click', async() => {
     const existingTitle = document.querySelector('.result');
 
     // Verifico se il titolo è già presente sul foglio di lavoro
-    if (!existingTitle || existingTitle.innerText !== "Result: " + resultObject.count) {
+    if (!existingTitle || existingTitle.innerText !== "Results: " + resultObject.count) {
     // Rimuovo il titolo esistente se presente
     if (existingTitle) {
         existingTitle.remove();
@@ -159,9 +169,9 @@ submit.addEventListener('click', async() => {
     // Ottieni la tabella esistente
     const existingTable = document.querySelector('table');
 
-    // Verifica se la tabella esiste già e se è diversa dalla precedente (outerHTML)
+    // Verifica prima se la tabella esiste già e se è diversa dalla precedente (outerHTML)
     if (existingTable && existingTable.outerHTML === document.getElementsByTagName('table')[0].outerHTML) {
-        // Se è uguale, rimuovi la tabella
+        // Se è diversa alla precedente, rimuovi la tabella 
         existingTable.remove();
     }
 

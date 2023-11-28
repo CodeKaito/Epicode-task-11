@@ -12,6 +12,10 @@ body {
     justify-content: center;
 }
 
+.bold {
+    font-weight: 700;
+}
+
 .input-container {
     display: flex;
     justify-content: center;
