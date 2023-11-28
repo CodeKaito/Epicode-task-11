@@ -62,7 +62,7 @@ input::placeholder {
     font-style: italic;
 }
 
-button {
+#cerca {
     margin-top: 20px;
     align-items: center;
     background-color: #0A66C2;
@@ -85,13 +85,13 @@ button {
     transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 }
 
-button:hover,
-button:focus { 
+#cerca:hover,
+#cerca:focus { 
   background-color: #16437E;
   color: #ffffff;
 }
 
-button:active {
+#cerca:active {
     background: #09223b;
     color: rgb(255, 255, 255, .7);
 }

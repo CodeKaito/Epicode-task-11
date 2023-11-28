@@ -132,7 +132,10 @@ let createTheResultTable = (resultArray) => {
 // Inserisco in una variabile il pulsante button
 let submit = document.getElementById('cerca');
 // Richiamo l'addEventListener per richiamare la funzione
-submit.addEventListener('click', async() => {
+document.querySelector('form').addEventListener('submit', async function(event) {
+    // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
+    event.preventDefault();
+
     // Identifico i valori dell'input della location
     let location = document.getElementById('location').value;
 
