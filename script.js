@@ -52,8 +52,8 @@ let createTheResultTitle = (num) => {
     // Creo l'elemento h1 per il titolo "Result"
     const titleResult = document.createElement("h1");
 
-    // Aggiungo il valore "Result: " + il count dei risultati
-    titleResult.textContent = "Result: " + num;
+    // Se ho risultati, aggiungo il valore "Result: " + il count dei risultati, se no mostro la scritta "NO RESUL"
+    (num === 0) ? titleResult.innerHTML = "No result" : titleResult.innerHTML = "Result: " + num;
 
     // Aggiungo la classe result per dargli uno styling
     titleResult.classList.add("result");
