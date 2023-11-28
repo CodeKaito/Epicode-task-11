@@ -128,9 +128,12 @@ let createTheResultTable = (resultArray) => {
     document.body.appendChild(table);
 }
 
+// Verifica se la stringa di input contiene almeno un numero
+function containsNumber(input) {
+    return /\d/.test(input); // Questa regex controlla se c'è almeno un numero nella stringa di input
+}
+
 //? MAIN FUNCTION
-// Inserisco in una variabile il pulsante button
-let submit = document.getElementById('cerca');
 // Richiamo l'addEventListener per richiamare la funzione
 document.querySelector('form').addEventListener('submit', async function(event) {
     // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
@@ -142,12 +145,12 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     // Identifico i valori dell'input del job title
     let jobTitle = document.getElementById('jobTitle').value;
 
-    // Verifico se gli input sono vuoti, se lo sono, voglio che la function si fermi e che la pagina mi dia un'errore
-    if (location === '' || jobTitle === '') {
-        alert("Error! Insert both values!");
-        // Interrompe l'esecuzione dell'intera funzione
-        return;
+    // Verifica se ci sono numeri nei campi di input per la "location" e il "jobTitle"
+    if (containsNumber(location) || containsNumber(jobTitle)) {
+        alert('Please enter only text in the input fields.'); // Mostra un avviso se ci sono numeri nei campi di input
+        return; // Interrompe l'esecuzione della funzione se ci sono numeri nei campi di input
     }
+    
     // Chiamo la searchAlgorithm in async, awaito che la promise venga completata e assegno questo valore al resultObject
     const resultObject = await searchAlgorithm(location, jobTitle);
     
@@ -176,3 +179,4 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     // Crea la tabella con i risultati
     createTheResultTable(resultObject.result);
 });
+
