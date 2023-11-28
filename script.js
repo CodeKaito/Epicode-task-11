@@ -4,25 +4,31 @@ import data_test from './data/jobs_test.js';
 
 // Il risultato della funzione searchAlgorithm
 let globalResultObject = null;
+
 // La tabella del risultato della funzione searchAlgorithm
 let existingTable = null;
+
+// Il titolo del risultato della funzione
+let existingTitle = null;
+
 // Dichiarazione della arrow function searchAlgorithm che prende in input sia location che title
-let searchAlgorithm = (location, titleJob) => {
+let searchAlgorithm = (location, jobTitle) => {
     // Inizializzo un array d'appoggio per inserire i valori trovati
     let result = [];
-    // Itero con un for in l'array di oggetti data_test
-    for (const key in data_test) {
+
+    // Itero con un for in l'array di oggetti data
+    for (const key in data) {
         // Inizializzo una variabile che prenda solo le locations dei singoli oggetti, aggiungo il punto 3 dell'esercizio 1 per il case insensitive
-        const locations = data_test[key].location.toLowerCase();
+        const locations = data[key].location.toLowerCase();
 
         // Inizializzo una variabile che prenda solo i titoli delle posizioni lavorative dei singoli oggetti, aggiungo il punto 3 dell'esercizio 1 per il case insensitive
-        const titleJobs = data_test[key].title.toLowerCase();
+        const titleJobs = data[key].title.toLowerCase();
 
         // Effettuo un confronto con l'input dell'utente e ció che ho a db per trovare i lavori che soddisfano i requisiti
-        if (locations.includes(location) && titleJobs.includes(titleJob)) {
+        if (locations.includes(location) && titleJobs.includes(jobTitle)) {
 
             // Inserisco all'interno dell'array di appoggio con un push, gli elementi che soddisfano i requisiti
-            result.push(data_test[key]);
+            result.push(data[key]);
         }
     }
 
@@ -45,12 +51,19 @@ let searchAlgorithm = (location, titleJob) => {
 let createTheResultTitle = (num) => {
     // Creo l'elemento h1 per il titolo "Result"
     const titleResult = document.createElement("h1");
+
     // Aggiungo il valore "Result: " + il count dei risultati
     titleResult.textContent = "Result: " + num;
+
     // Aggiungo la classe result per dargli uno styling
     titleResult.classList.add("result");
+
     // Aggiungo l'elemento in fondo al body del mio foglio di lavoro
     document.body.appendChild(titleResult);
+
+    // Assegno alla variabile existingTitle il titolo corrent
+    existingTitle = titleResult;
+    console.log(existingTitle.innerText);
 }
 
 // TODO: create the result table
@@ -109,17 +122,6 @@ let createTheResultTable = (resultArray) => {
     existingTable = table;
 }
 
-const resultArray = [
-    { location: 'NY, US', title: 'java dev' },
-    { location: 'US', title: 'dev' }
-];
-
-const resultObject = {
-    result: resultArray,
-    count: resultArray.length,
-};
-
-
 // Inserisco in una variabile il pulsante button
 let submit = document.getElementById('cerca');
 // Richiamo l'addEventListener per richiamare la funzione
@@ -139,11 +141,19 @@ submit.addEventListener('click', async() => {
     // Chiamo la searchAlgorithm in async, awaito che la promise venga completata e assegno questo valore al resultObject
     const resultObject = await searchAlgorithm(location, jobTitle);
     
-    // Verifico se il titolo é giá presente sul foglio di lavoro
-    if (!document.querySelector('.result')) {
-        // Stampo sul foglio di lavoro il count dei risultati trovati
-        createTheResultTitle(resultObject.count);
-    };
+    // Ottengo il titolo esistente
+    const existingTitle = document.querySelector('.result');
+
+    // Verifico se il titolo è già presente sul foglio di lavoro
+    if (!existingTitle || existingTitle.innerText !== "Result: " + resultObject.count) {
+    // Rimuovo il titolo esistente se presente
+    if (existingTitle) {
+        existingTitle.remove();
+    }
+
+    // Stampo sul foglio di lavoro il count dei risultati trovati
+    createTheResultTitle(resultObject.count);
+}
     
 
     // Ottieni la tabella esistente
