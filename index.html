@@ -5,9 +5,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Jobs</title>
 </head>
 <body>
+    <div class="main-container">
+        <div class="main-container-spacing">
+        <h1 class="title">CAREEROO</h1>
+        <h3 class="subtitle">Your career starts from here</h3>
+        <div class="input-container">
+            <div class="location-container">
+                <label for="location">Location</label><br>
+                <input type="text" id="location" placeholder="Insert a location" required>
+            </div>
+            
+            <div class="jobTtitle-container">
+                <label for="location">Job Title</label><br>
+                <input type="text" id="jobTitle" placeholder="Insert a job title" required>
+            </div>
+        </div>
+        <button type="button" id="cerca">Submit</button>
+        </div>
+        
+    </div>
     <script src="script.js" type="module"></script>
 </body>
 </html>
