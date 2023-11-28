@@ -136,7 +136,7 @@ submit.addEventListener('click', async() => {
         // Interrompe l'esecuzione dell'intera funzione
         return;
     }
-    // Chiamo la searchAlgorithm e awaito che sia completata
+    // Chiamo la searchAlgorithm in async, awaito che la promise venga completata e assegno questo valore al resultObject
     const resultObject = await searchAlgorithm(location, jobTitle);
     
     // Verifico se il titolo é giá presente sul foglio di lavoro
@@ -145,6 +145,7 @@ submit.addEventListener('click', async() => {
         createTheResultTitle(resultObject.count);
     };
     
+
     // Ottieni la tabella esistente
     const existingTable = document.querySelector('table');
 
