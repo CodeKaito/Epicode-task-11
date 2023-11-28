@@ -2,16 +2,13 @@
 import data from './data/jobs.js';
 import data_test from './data/jobs_test.js';
 
-// Il risultato della funzione searchAlgorithm
+// Inizializzo una variabile globalResulObject che ha come scope: "globale", la utilizzo per riutilizzare la variabile resultObject
 let globalResultObject = null;
 
-// La tabella del risultato della funzione searchAlgorithm
-let existingTable = null;
-
-// Il titolo del risultato della funzione
+// Inizializzo la tabella del risultato della funzione searchAlgorithm, serve ad identificare poi se la tabella corrente é uguale/diversa da quella precedente
 let existingTitle = null;
 
-// Dichiarazione della arrow function searchAlgorithm che prende in input sia location che title
+// Dichiarazione della arrow function searchAlgorithm che prende in input sia location che jobTitle dal db
 let searchAlgorithm = (location, jobTitle) => {
     // Inizializzo un array d'appoggio per inserire i valori trovati
     let result = [];
@@ -22,10 +19,10 @@ let searchAlgorithm = (location, jobTitle) => {
         const locations = data[key].location.toLowerCase();
 
         // Inizializzo una variabile che prenda solo i titoli delle posizioni lavorative dei singoli oggetti, aggiungo il punto 3 dell'esercizio 1 per il case insensitive
-        const titleJobs = data[key].title.toLowerCase();
+        const jobTitles = data[key].title.toLowerCase();
 
         // Effettuo un confronto con l'input dell'utente e ció che ho a db per trovare i lavori che soddisfano i requisiti
-        if (locations.includes(location) && titleJobs.includes(jobTitle)) {
+        if (locations.includes(location) && jobTitles.includes(jobTitle)) {
 
             // Inserisco all'interno dell'array di appoggio con un push, gli elementi che soddisfano i requisiti
             result.push(data[key]);
@@ -34,9 +31,9 @@ let searchAlgorithm = (location, jobTitle) => {
 
     // Creo l'oggetto risultato richiesto con result: gli elementi che soddisfano i requisiti e il count con il numero degli elementi
     const resultObject = {
-        // gli elementi che soddisfano i requisiti
+        // Gli elementi che soddisfano i requisiti
         result: result,
-        // il numero gli elementi che soddisfano i requisiti
+        // Il numero gli elementi che soddisfano i requisiti
         count: result.length,
     };
     // Salvo il risultato resultObject nella variabile esterna 
@@ -70,6 +67,9 @@ let createTheResultTitle = (num) => {
 // TODO: REFACTOR THIS FUNCTION
 // TODO: Aggiungi la condizione -> quando non ci sono risultati, non far comparire le row della tabella
 let createTheResultTable = (resultArray) => {
+    if (resultArray.length === 0) {
+        return;
+    }
     // Creazione di una tabella
     const table = document.createElement("table");
 
@@ -126,9 +126,6 @@ let createTheResultTable = (resultArray) => {
 
     // Aggiunta delle righe create dal for loop al corpo del documento, sotto l'headerRow    
     document.body.appendChild(table);
-
-    // Aggiorno la variabile existingTable con la nuova tabella
-    existingTable = table;
 }
 
 //? MAIN FUNCTION
@@ -164,8 +161,6 @@ submit.addEventListener('click', async() => {
     // Stampo sul foglio di lavoro il count dei risultati trovati
     createTheResultTitle(resultObject.count);
 }
-    
-
     // Ottieni la tabella esistente
     const existingTable = document.querySelector('table');
 
@@ -178,4 +173,3 @@ submit.addEventListener('click', async() => {
     // Crea la tabella con i risultati
     createTheResultTable(resultObject.result);
 });
-
