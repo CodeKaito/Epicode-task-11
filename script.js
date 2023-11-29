@@ -44,6 +44,7 @@ let searchAlgorithm = (location, jobTitle) => {
     return resultObject;
 }
 
+// TODO: Documentazione su come assegnare un id dinamicamente.
 // Definizione della funzione per creare il titolo "Result"
 let createTheResultTitle = (num) => {
     // Creo l'elemento h1 per il titolo "Result"
@@ -134,8 +135,8 @@ function containsNumber(input) {
 
 //? MAIN FUNCTION
 // Richiamo l'addEventListener per richiamare la funzione
-document.querySelector('form').addEventListener('input', async (event) => {
-    // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
+document.querySelector('form').addEventListener('input', (event) => {
+    // Richiamo il event.preventDefault() per non far fare un refeesh automatico alla pagina
     event.preventDefault();
 
     // Identifico i valori dell'input della location
@@ -151,8 +152,9 @@ document.querySelector('form').addEventListener('input', async (event) => {
     }
     
     // Chiamo la searchAlgorithm in async, awaito che la promise venga completata e assegno questo valore al resultObject
-    const resultObject = await searchAlgorithm(location, jobTitle);
+    const resultObject = searchAlgorithm(location, jobTitle);
     
+    // TODO: ASSEGNALI IL document.getElementById
     // Ottengo il titolo esistente
     const existingTitle = document.querySelector('.result');
 
