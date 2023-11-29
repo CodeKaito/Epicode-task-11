@@ -13,7 +13,7 @@ let searchAlgorithm = (location, jobTitle) => {
     // Inizializzo un array d'appoggio per inserire i valori trovati
     let result = [];
 
-    // Itero con un for in l'array di oggetti data
+    // Itero con un for in l'array di oggetti data, uso il for in per un fatto di comoditá per gli oggetti che contengono valori
     for (const key in data) {
         // Inizializzo una variabile che prenda solo le locations dei singoli oggetti, aggiungo il punto 3 dell'esercizio 1 per il case insensitive
         const locations = data[key].location.toLowerCase();
@@ -63,8 +63,8 @@ let createTheResultTitle = (num) => {
     console.log(existingTitle.innerText);
 }
 
-// TODO: REFACTOR THIS FUNCTION
-// TODO: Aggiungi la condizione -> quando non ci sono risultati, non far comparire le row della tabella
+// // TODO: REFACTOR THIS FUNCTION
+// // TODO: Aggiungi la condizione -> quando non ci sono risultati, non far comparire le row della tabella
 let createTheResultTable = (resultArray) => {
     if (resultArray.length === 0) {
         return;
