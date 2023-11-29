@@ -134,7 +134,7 @@ function containsNumber(input) {
 
 //? MAIN FUNCTION
 // Richiamo l'addEventListener per richiamare la funzione
-document.querySelector('form').addEventListener('submit', async (event) => {
+document.querySelector('form').addEventListener('input', async (event) => {
     // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
     event.preventDefault();
 
