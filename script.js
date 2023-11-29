@@ -179,9 +179,8 @@ document.querySelector('form').addEventListener('submit', async (event) => {
     createTheResultTable(resultObject.result);
 });
 
-let clear = document.getElementById('clear');
-
-clear.addEventListener('click', (event) => {
+// La funzione addEventListener del clear button
+document.getElementById('clear').addEventListener('click', (event) => {
     // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
     event.preventDefault();
     
