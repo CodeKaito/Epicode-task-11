@@ -136,7 +136,6 @@ input::placeholder {
 }
 
 td:hover {
-    font-size: 20.006px;
     font-weight: 700;
     cursor: pointer;
 }
