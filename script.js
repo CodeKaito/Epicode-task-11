@@ -44,6 +44,7 @@ let searchAlgorithm = (location, jobTitle) => {
     return resultObject;
 }
 
+// TODO: RIMUOVI LA CLASSE DAL TITOLO E ASSEGNAGLI UN ID
 // Definizione della funzione per creare il titolo "Result"
 let createTheResultTitle = (num) => {
     // Creo l'elemento h1 per il titolo "Result"
@@ -54,6 +55,9 @@ let createTheResultTitle = (num) => {
 
     // Aggiungo la classe result per dargli uno styling
     titleResult.classList.add("result");
+
+    // Aggiungo un id result per usarlo nell'addEventLister
+    titleResult.setAttribute("id","result");
 
     // Aggiungo l'elemento in fondo al body del mio foglio di lavoro
     document.body.appendChild(titleResult);
@@ -154,7 +158,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
     const resultObject = await searchAlgorithm(location, jobTitle);
     
     // Ottengo il titolo esistente
-    const existingTitle = document.querySelector('.result');
+    const existingTitle = document.getElementById('result');
 
     // Verifico se il titolo è già presente sul foglio di lavoro
     if (!existingTitle || existingTitle.innerText !== "Results: " + resultObject.count) {
