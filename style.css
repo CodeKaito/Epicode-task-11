@@ -107,6 +107,7 @@ input::placeholder {
     background-color: #7e1616;
 }
 
+
 .button:active {
     background: #09223b;
     color: rgb(255, 255, 255, .7);

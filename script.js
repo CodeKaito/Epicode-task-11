@@ -22,7 +22,7 @@ let searchAlgorithm = (location, jobTitle) => {
         const jobTitles = data[key].title.toLowerCase();
 
         // Effettuo un confronto con l'input dell'utente e ció che ho a db per trovare i lavori che soddisfano i requisiti
-        if (locations.includes(location) && jobTitles.includes(jobTitle)) {
+        if (locations.includes(location.toLowerCase()) && jobTitles.includes(jobTitle.toLowerCase())) {
 
             // Inserisco all'interno dell'array di appoggio con un push, gli elementi che soddisfano i requisiti
             result.push(data[key]);
@@ -43,7 +43,6 @@ let searchAlgorithm = (location, jobTitle) => {
     // Ritorno il risultato in formato array di oggetti alla funzione searchAlgorithm iniziale
     return resultObject;
 }
-
 
 // Definizione della funzione per creare il titolo "Result"
 let createTheResultTitle = (num) => {
@@ -135,7 +134,7 @@ function containsNumber(input) {
 
 //? MAIN FUNCTION
 // Richiamo l'addEventListener per richiamare la funzione
-document.querySelector('form').addEventListener('submit', async function(event) {
+document.querySelector('form').addEventListener('submit', async (event) => {
     // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
     event.preventDefault();
 
@@ -182,14 +181,14 @@ document.querySelector('form').addEventListener('submit', async function(event) 
 
 let clear = document.getElementById('clear');
 
-clear.addEventListener('click', async function(event) {
+clear.addEventListener('click', (event) => {
     // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
     event.preventDefault();
     
     let inputFields = document.getElementsByTagName('input');
     for (let i = 0; i < inputFields.length; i++) {
         // Check if the input element has a specific ID
-        if (inputFields[i].id !== 'cerca' && inputFields[i].id !== 'clear') {
+        if (inputFields[i].id !== 'cerca' && inputFields[i].id !== 'clear' && inputFields[i].id !== 'all') {
             inputFields[i].value = ''; // Clear the value of each input field
         }
     }
