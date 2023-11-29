@@ -180,3 +180,30 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     createTheResultTable(resultObject.result);
 });
 
+let clear = document.getElementById('clear');
+
+clear.addEventListener('click', async function(event) {
+    // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
+    event.preventDefault();
+    
+    let inputFields = document.getElementsByTagName('input');
+    for (let i = 0; i < inputFields.length; i++) {
+        // Check if the input element has a specific ID
+        if (inputFields[i].id !== 'cerca' && inputFields[i].id !== 'clear') {
+            inputFields[i].value = ''; // Clear the value of each input field
+        }
+    }
+
+    // Rimuovo il titolo esistente se presente
+    if (existingTitle) {
+        existingTitle.remove();
+    }
+
+    // Ottengo il titolo esistente
+    const existingTable = document.querySelector('table');
+    // Verifica prima se la tabella esiste già e se è diversa dalla precedente (outerHTML)
+    if (existingTable && existingTable.outerHTML === document.getElementsByTagName('table')[0].outerHTML) {
+        // Se è diversa alla precedente, rimuovi la tabella 
+        existingTable.remove();
+    }
+});
