@@ -4,8 +4,8 @@
 }
 
 body {
+    margin-top: 30vh;
     font-family: 'Montserrat', sans-serif;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,10 +62,9 @@ input::placeholder {
     font-style: italic;
 }
 
-button {
+.button{
     margin-top: 20px;
     align-items: center;
-    background-color: #0A66C2;
     border: 0;
     border-radius: 100px;
     box-sizing: border-box;
@@ -85,13 +84,30 @@ button {
     transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 }
 
-button:hover,
-button:focus { 
-  background-color: #16437E;
+#cerca {
+    background-color: #0A66C2;
+}
+
+#clear {
+    background-color: #c20a0a;
+}
+
+.button:hover,
+.button:focus { 
   color: #ffffff;
 }
 
-button:active {
+#cerca:hover,
+#cerca:focus {
+    background-color: #16437E;
+}
+
+#clear:hover,
+#clear:focus {
+    background-color: #7e1616;
+}
+
+.button:active {
     background: #09223b;
     color: rgb(255, 255, 255, .7);
 }
@@ -100,15 +116,11 @@ button:active {
     margin-top: 20px;
 }
 
-.error {
-    margin-top: 20px;
-    color: red;
-}
-
 .result-table {
     margin-top: 20px;
+    margin-bottom: 20vh;
     border-collapse: collapse;
-    width: 30%;
+    width: 70%;
     font-size: 20px;
     font-weight: 500;
 }

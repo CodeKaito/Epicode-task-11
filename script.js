@@ -128,23 +128,29 @@ let createTheResultTable = (resultArray) => {
     document.body.appendChild(table);
 }
 
+// Verifica se la stringa di input contiene almeno un numero
+function containsNumber(input) {
+    return /\d/.test(input); // Questa regex controlla se c'è almeno un numero nella stringa di input
+}
+
 //? MAIN FUNCTION
-// Inserisco in una variabile il pulsante button
-let submit = document.getElementById('cerca');
 // Richiamo l'addEventListener per richiamare la funzione
-submit.addEventListener('click', async() => {
+document.querySelector('form').addEventListener('submit', async function(event) {
+    // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
+    event.preventDefault();
+
     // Identifico i valori dell'input della location
     let location = document.getElementById('location').value;
 
     // Identifico i valori dell'input del job title
     let jobTitle = document.getElementById('jobTitle').value;
 
-    // Verifico se gli input sono vuoti, se lo sono, voglio che la function si fermi e che la pagina mi dia un'errore
-    if (location === '' || jobTitle === '') {
-        alert("Error! Insert both values!");
-        // Interrompe l'esecuzione dell'intera funzione
-        return;
+    // Verifica se ci sono numeri nei campi di input per la "location" e il "jobTitle"
+    if (containsNumber(location) || containsNumber(jobTitle)) {
+        alert('Please enter only text in the input fields.'); // Mostra un avviso se ci sono numeri nei campi di input
+        return; // Interrompe l'esecuzione della funzione se ci sono numeri nei campi di input
     }
+    
     // Chiamo la searchAlgorithm in async, awaito che la promise venga completata e assegno questo valore al resultObject
     const resultObject = await searchAlgorithm(location, jobTitle);
     
@@ -172,4 +178,32 @@ submit.addEventListener('click', async() => {
 
     // Crea la tabella con i risultati
     createTheResultTable(resultObject.result);
+});
+
+let clear = document.getElementById('clear');
+
+clear.addEventListener('click', async function(event) {
+    // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
+    event.preventDefault();
+    
+    let inputFields = document.getElementsByTagName('input');
+    for (let i = 0; i < inputFields.length; i++) {
+        // Check if the input element has a specific ID
+        if (inputFields[i].id !== 'cerca' && inputFields[i].id !== 'clear') {
+            inputFields[i].value = ''; // Clear the value of each input field
+        }
+    }
+
+    // Rimuovo il titolo esistente se presente
+    if (existingTitle) {
+        existingTitle.remove();
+    }
+
+    // Ottengo il titolo esistente
+    const existingTable = document.querySelector('table');
+    // Verifica prima se la tabella esiste già e se è diversa dalla precedente (outerHTML)
+    if (existingTable && existingTable.outerHTML === document.getElementsByTagName('table')[0].outerHTML) {
+        // Se è diversa alla precedente, rimuovi la tabella 
+        existingTable.remove();
+    }
 });
