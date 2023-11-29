@@ -185,11 +185,13 @@ clear.addEventListener('click', (event) => {
     // Richiamo il event.preventDefault() per non far fare un refeesh automaitco alla pagina
     event.preventDefault();
     
+    // Assegno ad inputFields gli input, di modo da iterare sull'array
     let inputFields = document.getElementsByTagName('input');
+    // Itero sugli array di tutti gli input
     for (let i = 0; i < inputFields.length; i++) {
-        // Check if the input element has a specific ID
-        if (inputFields[i].id !== 'cerca' && inputFields[i].id !== 'clear' && inputFields[i].id !== 'all') {
-            inputFields[i].value = ''; // Clear the value of each input field
+        // Elimino dalla lista di oggetti gli input submit cerca e clear
+        if (inputFields[i].id !== 'cerca' && inputFields[i].id !== 'clear') {
+            inputFields[i].value = ''; // Faccio il clear di tutti gli input text
         }
     }
 
