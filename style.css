@@ -120,6 +120,10 @@ input::placeholder {
     color: rgb(255, 255, 255, .7);
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
 .result {
     margin-top: 20px;
 }
