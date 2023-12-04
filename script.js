@@ -203,7 +203,7 @@ document.getElementById('clear').addEventListener('click', (event) => {
         existingTitle.remove();
     }
 
-    // Ottengo il titolo esistente
+    // Ottengo la tabella esistente
     const existingTable = document.querySelector('table');
     // Verifica prima se la tabella esiste già e se è diversa dalla precedente (outerHTML)
     if (existingTable && existingTable.outerHTML === document.getElementsByTagName('table')[0].outerHTML) {
